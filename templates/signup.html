@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Email Classification Website</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('{{ url_for("static", filename="images/hero-bg.png") }}') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .input-box {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-box span.details {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-box input:focus {
+            border-color: #007bff;
+        }
+
+        .password-input {
+            position: relative;
+        }
+
+        .password-input button {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        .button input[type="submit"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .signup-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        #name-error, #username-error, #email-error {
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Registration</div>
+        <div class="content">
+            <form method="POST" action="/register" onsubmit="return validateForm()">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Full Name</span>
+                        <input type="text" name="full_name" id="full_name" placeholder="e.g. John Doe" required>
+                        <span id="name-error" style="color: red;"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Username</span>
+                        <input type="text" name="username" id="username" placeholder="e.g. JohnDoe" required oninput="validateUsername()">
+                        <span id="username-error" style="color: red;"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="email" name="email" id="email" placeholder="e.g. abc@mail.com" required>
+                        <span id="email-error" style="color: red;"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input type="text" name="phone" id="phone" placeholder="e.g. 0123456789" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Password</span>
+                        <div class="password-input">
+                            <input type="password" name="password" id="password" placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" required>
+                            <button type="button" id="togglePassword"><i class="fa-solid fa-eye-slash"></i></button>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Confirm Password</span>
+                        <div class="password-input">
+                            <input type="password" name="confirm_password" id="confirm_password" placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" required>
+                            <button type="button" id="toggleConfirmPassword"><i class="fa-solid fa-eye-slash"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Register">
+                </div>
+                <div class="signup-link">
+                    <center>Already a member? <a href="/signin">LogIn now</a></center>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const password = document.getElementById('password');
+            const toggleIcon = this.querySelector('i');
+            if (password.type === 'password') {
+                password.type = 'text';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                password.type = 'password';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+            const confirmPassword = document.getElementById('confirm_password');
+            const toggleIcon = this.querySelector('i');
+            if (confirmPassword.type === 'password') {
+                confirmPassword.type = 'text';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                confirmPassword.type = 'password';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
+        });
+    </script>
+    <script src="{{ url_for('static', filename='signup.js') }}"></script>
+</body>
+
+</html>

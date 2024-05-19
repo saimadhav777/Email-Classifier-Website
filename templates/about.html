@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Email Classification Website</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- Owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <!-- Font awesome style -->
+    <link href="{{ url_for('static', filename='font-awesome.min.css') }}" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" />
+    <!-- Responsive style -->
+    <link href="{{ url_for('static', filename='responsive.css') }}" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .navbar-brand span {
+            font-weight: 900;
+            color: #f76c6c;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #f76c6c;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f76c6c;
+            text-decoration: underline;
+        }
+
+        .hero_area {
+            background: url('https://source.unsplash.com/random/1600x900') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero_area::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero_area .hero_bg_box {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header_section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+        }
+
+        .about_section {
+            background-color: #fff;
+            padding: 60px 0;
+        }
+
+        .about_section h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about_section h2 span {
+            color: #f76c6c;
+        }
+
+        .about_section p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .about_section .img-box img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .about_section .detail-box h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about_section .detail-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f76c6c;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .about_section .detail-box a:hover {
+            background-color: #333;
+        }
+
+        .info_section {
+            background-color: #f8f8f8;
+            padding: 60px 0;
+        }
+
+        .info_section h4 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .info_section p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .info_contact .contact_link_box a {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info_contact .contact_link_box a:hover {
+            color: #f76c6c;
+        }
+
+        .info_social a {
+            font-size: 20px;
+            color: #333;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .info_social a:hover {
+            color: #f76c6c;
+        }
+
+        .info_link_box .info_links a {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info_link_box .info_links a:hover {
+            color: #f76c6c;
+        }
+
+        .info_section form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .info_section form button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f76c6c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .info_section form button:hover {
+            background-color: #333;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #f76c6c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar-nav {
+            margin-left: 0;
+        }
+
+        .navbar-nav .nav-item {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0;
+        }
+
+        .info_row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .info_col {
+            flex: 1 1 22%;
+            max-width: 22%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .info_social {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .info_social a {
+            margin-right: 10px;
+        }
+
+        .subscribe_col {
+            position: relative;
+            top: 2px; /* Adjust the top value to move it down */
+            left: -100px; /* Adjust the left value to move it to the left */
+        }
+    </style>
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+        <div class="hero_bg_box">
+            <div class="bg_img_box">
+                <img src="{{ url_for('static', filename='images/hero-bg.png') }}" alt="">
+            </div>
+        </div>
+
+        <!-- header section starts -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="/">
+                        <span>Email Classifier</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class=""></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin"><i class="fa fa-user" aria-hidden="true"></i>Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+
+        <div class="hero_bg_box">
+            <div class="hero_text">
+                <h1>Welcome to Email Classification Website</h1>
+                <p>Your solution for spam mail classification</p>
+                <a href="/signup" class="hero_btn">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- about section -->
+    <section class="about_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <img src="{{ url_for('static', filename='images/about-img.jpg') }}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-box">
+                        <h2>About <span>Our Platform</span></h2>
+                        <p>Welcome to our Email Classification website! This project was developed by Khundhan Bhargav and Sai Madhav, who are currently in their third year of B.Tech. Our aim is to create an efficient and user-friendly platform for classifying emails as either spam or not spam.</p>
+                        <p>Our platform leverages state-of-the-art machine learning models to accurately detect and filter out spam emails. By using advanced natural language processing techniques, we ensure that only relevant and important emails make it to your inbox, while spam and phishing attempts are effectively blocked.</p>
+                        <h3>Technologies Used</h3>
+                        <p>We utilized a range of modern technologies to build this application:</p>
+                        <ul>
+                            <li><strong>Backend:</strong> Flask and MySQL</li>
+                            <li><strong>Frontend:</strong> HTML,CSS and JavaScript</li>
+                        </ul>
+                        <h3>Machine Learning Model</h3>
+                        <p>Our email classification model was trained using the following algorithms and processes:</p>
+                        <ol>
+                            <li><strong>Data Preprocessing:</strong> Text transformation including tokenization, stemming, and removing stopwords using the NLTK library. Conversion of text data into numerical data using TfidfVectorizer.</li>
+                            <li><strong>Model Training:</strong> We used the Multinomial Naive Bayes algorithm, a popular choice for text classification tasks.</li>
+                        </ol>
+                        <h3>Process Overview</h3>
+                        <ol>
+                            <li><strong>Data Collection:</strong> We gathered a labeled dataset containing spam and non-spam emails.</li>
+                            <li><strong>Text Preprocessing:</strong> The text data was cleaned and preprocessed by converting it to lowercase, removing punctuation and stopwords, and applying stemming to standardize the words.</li>
+                            <li><strong>Feature Extraction:</strong> We used TfidfVectorizer to convert the preprocessed text data into a matrix of TF-IDF features.</li>
+                            <li><strong>Model Training:</strong> The Multinomial Naive Bayes model was trained on the TF-IDF features to learn patterns that distinguish spam emails from non-spam emails.</li>
+                            <li><strong>Model Evaluation:</strong> The trained model was evaluated on a test dataset to ensure its accuracy and reliability.</li>
+                            <li><strong>Deployment:</strong> The trained model and the vectorizer were saved using pickle and deployed using Flask, allowing users to interact with the model via a web interface.</li>
+                        </ol>
+                        <h3>Meet the Team</h3>
+                        <p>Khundhan Bhargav and Sai Madhav, both third-year B.Tech students, have a keen interest in machine learning and web development. This project is a testament to their skills and dedication to creating practical solutions using cutting-edge technologies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end about section -->
+
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+        <div class="container">
+            <div class="info_row">
+                <div class="info_col">
+                    <div class="info_contact">
+                        <h4>Address</h4>
+                        <div class="contact_link_box">
+                            <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i><span>India</span></a>
+                            <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i><span>Mail Us</span></a>
+                        </div>
+                        <div class="info_social">
+                            <a href="https://www.linkedin.com/in/khundhan-bhargav-pula-b5a716248/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="https://github.com/saimadhav777" target="_blank"><i class="fa fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_col">
+                    <div class="info_detail">
+                        <h4>Info</h4>
+                        <p>Spam mail classification uses algorithms to separate unwanted emails from legitimate ones.</p>
+                    </div>
+                </div>
+                <div class="info_col">
+                    <div class="info_link_box">
+                        <h4>Links</h4>
+                        <div class="info_links">
+                            <a href="/">Home</a>
+                            <a href="/about">About</a>
+                            <a href="/signin">Log In</a>
+                            <a href="/signup">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info_col subscribe_col">
+                    <h4>Subscribe</h4>
+                    <form action="#">
+                        <input type="text" placeholder="Enter email" />
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end info section -->
+
+    <!-- footer section -->
+    <footer>
+        <p>&copy; <span id="displayYear"></span> All Rights Reserved By <a href="https://html.design/">Free Html Templates</a></p>
+    </footer>
+    <!-- end footer section -->
+
+    <script>
+        document.getElementById('displayYear').innerText = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
