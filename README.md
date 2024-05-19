@@ -97,8 +97,8 @@ Feel free to customize this README template to better fit your project's require
 
 ## Screen-Shots
 
-![Home-Page](images\Home-page.png)
-![Login-Page](images\Login-page.png)
-![Register-Page](images\Register-page.png)
-![About-section](images\About-section-1.png)
-![Email-classifier](images\Email-classifier.png)
+![Home-Page](images/Home-page.png)
+![Login-Page](images/Login-page.png)
+![Register-Page](images/Register-page.png)
+![About-section](images/About-section-1.png)
+![Email-classifier](images/Email-classifier.png)
